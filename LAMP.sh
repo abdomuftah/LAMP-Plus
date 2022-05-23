@@ -79,11 +79,6 @@ rm mysql_secure_installation.sh
 #
 systemctl restart mysql.service
 #
-apt update
-apt upgrade -y
-apt-get update 
-apt-get upgrade -y
-#
 echo "=================================="
 echo "installing PHP 8.1 + modules"
 echo "=================================="
@@ -116,11 +111,6 @@ rm /etc/apache2/sites-available/000-default.conf
 wget -P /var/www/html/$domain https://raw.githubusercontent.com/abdomuftah/LAMP-Plus/main/assets/index.php
 a2ensite $domain
 systemctl restart apache2
-#
-apt update
-apt upgrade -y
-apt-get update 
-apt-get upgrade -y
 #
 echo "=================================="
 echo "Installing nodeJS"
@@ -164,6 +154,7 @@ add-apt-repository -r ppa:phpmyadmin/ppa -y
 add-apt-repository -r ppa:webupd8team/java -y
 add-apt-repository -r ppa:chris-lea/redis-server -y
 add-apt-repository -r ppa:deadsnakes/ppa -y
+add-apt-repository -r ppa:certbot/certbot -y
 #
 wget https://raw.githubusercontent.com/abdomuftah/LAMP-Plus/main/assets/sdomain.sh
 chmod +x sdomain.sh
