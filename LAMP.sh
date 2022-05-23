@@ -151,7 +151,6 @@ add-apt-repository -r ppa:phpmyadmin/ppa -y
 add-apt-repository -r ppa:webupd8team/java -y
 add-apt-repository -r ppa:chris-lea/redis-server -y
 add-apt-repository -r ppa:deadsnakes/ppa -y
-add-apt-repository -r ppa:certbot/certbot -y
 #
 wget https://raw.githubusercontent.com/abdomuftah/LAMP-Plus/main/assets/sdomain.sh
 chmod +x sdomain.sh
