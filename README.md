@@ -16,7 +16,7 @@ Apache2 / Mariadb / PHP 8.1 + modules / phpMyAdmin / nodeJS / SSL Let's Encrypt 
 قم بنسخ الامر ال
 
 
-	wget https://is.gd/KlTGhE -O LAMP.sh && chmod +x LAMP.sh
+	wget https://l.snyt.xyz/KMwh7 -O LAMP.sh && chmod +x LAMP.sh
  
  
 
@@ -34,7 +34,7 @@ Apache2 / Mariadb / PHP 8.1 + modules / phpMyAdmin / nodeJS / SSL Let's Encrypt 
 copy this command : 
 
 
-	wget https://is.gd/KlTGhE -O LAMP.sh && chmod +x LAMP.sh
+	wget https://l.snyt.xyz/KMwh7 -O LAMP.sh && chmod +x LAMP.sh
  
 
 then run it with :
