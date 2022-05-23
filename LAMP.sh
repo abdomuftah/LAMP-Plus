@@ -122,7 +122,7 @@ echo "=================================="
 echo "Fixing MySQL And phpMyAdmin"
 echo "=================================="
 wget https://raw.githubusercontent.com/abdomuftah/LAMP-Plus/main/assets/fix.sql
-#mysql -u root < fix.sql 
+mysql -u root < fix.sql 
 service mysql restart
 systemctl restart apache2.service
 rm fix.sql 
