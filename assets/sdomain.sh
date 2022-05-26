@@ -13,7 +13,7 @@ read -p 'Set Web Domain (Example: 127.0.0.1 [Not trailing slash!]) : ' sdomain
 read -p 'Email for Lets Encrypt SSL : ' semail
 #
 mkdir /var/www/html/$sdomain
-wget -P /etc/apache2/sites-available https://raw.githubusercontent.com/abdomuftah/UbuntuServer/main/assets/Example.conf
+wget -P /etc/apache2/sites-available https://raw.githubusercontent.com/abdomuftah/LAMP-Plus/main/assets/Example.conf
 mv /etc/apache2/sites-available/Example.conf /etc/apache2/sites-available/$sdomain.conf
 sed -i "s/example.com/$sdomain/g" /etc/apache2/sites-available/$sdomain.conf
 wget -P /var/www/html/$sdomain https://raw.githubusercontent.com/abdomuftah/UbuntuServer/main/assets/index.php
