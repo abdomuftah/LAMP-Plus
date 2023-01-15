@@ -83,10 +83,6 @@ systemctl restart apache2.service
 echo "=================================="
 echo "Install and Secure phpMyAdmin"
 echo "=================================="
-apt update
-apt upgrade -y
-apt-get update 
-apt-get upgrade -y
 apt-get install -y phpmyadmin php8.1-gettext
 #
 echo "=================================="
@@ -128,9 +124,8 @@ rm fix.sql
 echo "=================================="
 echo "Installing Let's Encrypt "
 echo "=================================="
-certbot --noninteractive --agree-tos --no-eff-email --cert-name $domain --apache --redirect -d $domain -m $email
-systemctl restart apache2.service
-certbot renew --dry-run
+#certbot --noninteractive --agree-tos --no-eff-email --cert-name $domain --apache --redirect -d $domain -m $email
+#certbot renew --dry-run
 systemctl restart apache2.service
 #
 echo "=================================="
@@ -155,8 +150,6 @@ chmod +x sdomain.sh
 #
 apt update
 apt upgrade -y
-apt-get update 
-apt-get upgrade -y
 clear
 #
 echo "your PHP Ver is :"
