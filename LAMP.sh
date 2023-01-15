@@ -67,7 +67,10 @@ systemctl stop mariadb.service
 systemctl start mariadb.service
 systemctl enable mariadb.service
 #
-mysql_secure_installation
+#mysql_secure_installation
+#
+wget https://raw.githubusercontent.com/abdomuftah/LAMP-Plus/main/assets/mysql_secure_installation.sh
+sed -i "s/mySQLpassword/$sqpass/g" /etc/apache2/sites-available/$domain.conf
 #
 systemctl restart mysql.service
 #
