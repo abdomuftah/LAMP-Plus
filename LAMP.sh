@@ -128,8 +128,8 @@ rm fix.sql
 echo "=================================="
 echo "Installing Let's Encrypt "
 echo "=================================="
-#certbot --noninteractive --agree-tos --no-eff-email --cert-name $domain --apache --redirect -d $domain -m $email
-#certbot renew --dry-run
+certbot --noninteractive --agree-tos --no-eff-email --cert-name $domain --apache --redirect -d $domain -m $email
+certbot renew --dry-run
 systemctl restart apache2.service
 #
 echo "=================================="
