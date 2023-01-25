@@ -156,8 +156,12 @@ apt update
 apt upgrade -y
 clear
 #
-echo "your PHP Ver is :"
-php -v 
+=========================================
+DISTRO=`cat /etc/*-release | grep "^ID=" | grep -E -o "[a-z]\w+"`
+echo "Your operating system is $DISTRO"
+=========================================
+CURRENT=$(php -v | head -n 1 | cut -d " " -f 2 | cut -f1-2 -d".")
+echo "current php version of this system PHP-$CURRENT"
 #
 echo "##################################"
 echo "You Can Thank Me On :) "
