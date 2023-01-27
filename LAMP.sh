@@ -71,7 +71,7 @@ mysql_secure_installation
 #
 #wget https://raw.githubusercontent.com/abdomuftah/LAMP-Plus/main/assets/mysql_secure_installation.sh
 #sed -i "s/mySQLpassword/$sqpass/g" /root/mysql_secure_installation.sh
-c#hmod +x mysql_secure_installation.sh
+chmod +x mysql_secure_installation.sh
 #./mysql_secure_installation.sh
 #
 #rm mysql_secure_installation.sh
