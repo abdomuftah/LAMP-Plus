@@ -143,6 +143,10 @@ systemctl start glances.service
 systemctl enable glances.service
 rm glances.sh
 #
+a2enmod php8.1
+update-alternatives --set php /usr/bin/php8.1
+systemctl restart apache2.service
+#
 add-apt-repository -r ppa:ondrej/php -y
 add-apt-repository -r ppa:phpmyadmin/ppa -y
 add-apt-repository -r ppa:webupd8team/java -y
