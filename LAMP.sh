@@ -41,14 +41,15 @@ echo " install some tools to help you more :) "
 echo "=================================="
 apt-get install -y screen nano curl git zip unzip ufw certbot python3-certbot-apache
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-apt-get install -y python3.7 libmysqlclient-dev python3-dev python3-pip 
+apt-get install -y python3.11 libmysqlclient-dev python3-dev python3-pip 
+ln -s /usr/bin/python3.11 /usr/bin/python
 python3 get-pip.py
 python3 -m pip install Django
 #
 echo "=================================="
 echo "installing Apache2"
 echo "=================================="
-apt install apache2
+apt install apache2 -y
 #
 systemctl stop apache2.service
 systemctl start apache2.service
@@ -87,7 +88,7 @@ systemctl restart apache2.service
 echo "=================================="
 echo "Install and Secure phpMyAdmin"
 echo "=================================="
-apt-get install -y phpmyadmin php8.1-gettext
+apt-get install -y phpmyadmin 
 #
 echo "=================================="
 echo "Update php.ini file "
