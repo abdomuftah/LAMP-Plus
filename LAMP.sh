@@ -26,7 +26,7 @@ apt autoremove -y
 apt-get install default-jdk -y
 apt-get install software-properties-common -y
 apt-add-repository ppa:webupd8team/java -y
-add-apt-repository ppa:ondrej/apache2 -y
+add-apt-repository ppa:ondrej/php -y
 add-apt-repository ppa:ondrej/apache2 -y
 add-apt-repository ppa:phpmyadmin/ppa -y
 add-apt-repository ppa:deadsnakes/ppa -y
