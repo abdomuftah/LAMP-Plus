@@ -25,12 +25,12 @@ apt dist-upgrade
 apt autoremove -y
 apt-get install default-jdk -y
 apt-get install software-properties-common -y
-apt-add-repository ppa:webupd8team/java -y
+add-apt-repository ppa:linuxuprising/java -y
 add-apt-repository ppa:ondrej/php -y
 add-apt-repository ppa:ondrej/apache2 -y
 add-apt-repository ppa:phpmyadmin/ppa -y
 add-apt-repository ppa:deadsnakes/ppa -y
-add-apt-repository -y ppa:chris-lea/redis-server
+add-apt-repository ppa:redislabs/redis -y
 #
 apt update
 apt upgrade -y
@@ -148,12 +148,6 @@ rm glances.sh
 a2enmod php8.1
 update-alternatives --set php /usr/bin/php8.1
 systemctl restart apache2.service
-#
-add-apt-repository -r ppa:ondrej/php -y
-add-apt-repository -r ppa:phpmyadmin/ppa -y
-add-apt-repository -r ppa:webupd8team/java -y
-add-apt-repository -r ppa:chris-lea/redis-server -y
-add-apt-repository -r ppa:deadsnakes/ppa -y
 #
 wget https://raw.githubusercontent.com/abdomuftah/LAMP-Plus/main/assets/sdomain.sh
 chmod +x sdomain.sh
