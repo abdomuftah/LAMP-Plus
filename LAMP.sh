@@ -31,6 +31,7 @@ add-apt-repository ppa:ondrej/apache2 -y
 add-apt-repository ppa:phpmyadmin/ppa -y
 add-apt-repository ppa:deadsnakes/ppa -y
 add-apt-repository ppa:redislabs/redis -y
+add-apt-repository ppa:fkrull/deadsnakes -y
 #
 apt update
 apt upgrade -y
