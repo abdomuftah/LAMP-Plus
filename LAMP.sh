@@ -191,6 +191,7 @@ systemctl enable glances.service
 rm glances.sh
 
 # Set PHP version
+a2enmod php8.1
 update-alternatives --set php /usr/bin/php8.1
 systemctl restart apache2
 service php8.1-fpm reload
