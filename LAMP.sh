@@ -145,8 +145,7 @@ service php8.1-fpm reload
 # Install Let's Encrypt SSL
 echo -e "\e[1;32mInstalling Let's Encrypt SSL...\e[0m"
 sleep 3
-certbot --noninteractive --agree-tos --no-eff-email --cert-name $domain --apache2 --redirect -d $domain -m $email || display_error "Failed to install Let's Encrypt SSL"
-systemctl restart apache2
+certbot --noninteractive --agree-tos --no-eff-email --cert-name $domain --apache --redirect -d $domain -m $email || display_error "Failed to install Let's Encrypt SSL"
 certbot renew --dry-run
 systemctl restart apache2
 
