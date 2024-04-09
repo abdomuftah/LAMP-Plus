@@ -109,10 +109,19 @@ Y
 Y
 EOF
 
+# Grant necessary privileges to the root user
+echo -e "\e[1;32m******************************************\e[0m"
+echo -e "\e[1;32mGranting necessary privileges to MySQL root user...\e[0m"
+echo -e "\e[1;32m******************************************\e[0m"
+sudo mysql -u root -p"$mysql_root_password" <<EOF
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '$mysql_root_password' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+EOF
+
 # Restart MariaDB service
 sudo systemctl restart mariadb || display_error "Failed to restart MariaDB"
 echo -e "\e[1;32mMariaDB has been successfully installed and secured.\e[0m"
-
+sleep 3
 # Continue with the rest of the installation process...
 
 # Install PHP 8.1 and required modules
@@ -212,19 +221,19 @@ echo -e "\e[1;35mCurrent PHP version of this system:\e[0m" "PHP-$CURRENT"
 #
 echo -e "\e[1;35m##################################\e[0m"
 echo -e "\e[1;35mYou can thank me on:\e[0m"
-echo -e "\e[1;35mhttps://twitter.com/ScarNaruto\e[0m"
+echo -e "https://twitter.com/ScarNaruto"
 echo -e "\e[1;35mJoin my Discord Server:\e[0m"
-echo -e "\e[1;35mhttps://discord.snyt.xyz\e[0m"
+echo -e "https://discord.snyt.xyz"
 echo -e "\e[1;35m##################################\e[0m"
 echo -e "\e[1;35mYou can add a new domain to your server\e[0m"
-echo -e "\e[1;35mby typing: ./sdomain.sh in the terminal\e[0m"
+echo -e "\e[1;35mby typing:\e[0m" ./sdomain.sh "\e[1;35min the terminal\e[0m"
 echo -e "\e[1;35m----------------------------------\e[0m"
 echo -e "\e[1;35mphpMyAdmin Credentials:\e[0m"
 echo -e "\e[1;35mUsername: root\e[0m"
 echo -e "\e[1;35mPassword: $mysql_root_password\e[0m"
 echo -e "\e[1;35m----------------------------------\e[0m"
 echo -e "\e[1;35mCheck your web server by going to this link:\e[0m"
-echo -e "\e[1;35mhttps://$domain\e[0m"
+echo -e "https://$domain"
 #
 rm ~/LAMP.sh
 exit

@@ -68,6 +68,7 @@
             <h2>Server Details</h2>
             <div class="info">
                 <p><strong>Server Software:</strong> <?php echo $_SERVER['SERVER_SOFTWARE']; ?></p>
+                <p><strong>PHP Version:</strong> <?php echo phpversion(); ?></p>
                 <p><strong>Server IP:</strong> <?php echo $_SERVER['SERVER_ADDR']; ?></p>
                 <p><strong>Server Port:</strong> <?php echo $_SERVER['SERVER_PORT']; ?></p>
                 <p><strong>Server Protocol:</strong> <?php echo $_SERVER['SERVER_PROTOCOL']; ?></p>
