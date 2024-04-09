@@ -101,7 +101,7 @@ echo -e "\e[1;32mMariaDB has been successfully installed and secured.\e[0m"
 
 # Install PHP 8.1 and required modules
 echo -e "\e[1;32mInstalling PHP 8.1 + modules...\e[0m"
-apt -y install php8.1 php8.1-{curl,common,cli,mysql,sqlite3,intl,gd,mbstring,fpm,xml,redis,zip,bcmath,simplexml,tokenizer,dom,fileinfo,iconv,ctype,xmlrpc,soap,bz2,imagick,tidy} || display_error "Failed to install PHP"
+apt -y install php8.1 php8.1-curl php8.1-common php8.1-cli php8.1-mysql php8.1-sqlite3 php8.1-intl php8.1-gd php8.1-mbstring php8.1-fpm php8.1-xml php8.1-zip php8.1-bcmath libapache2-mod-php8.1 php8.1-sqlite3 php8.1-gd php8.1-intl php8.1-xmlrpc php8.1-soap php8.1-bz2 php8.1-imagick php8.1-tidy tar redis-server sed composer
 systemctl enable --now php8.1-fpm || display_error "Failed to enable PHP 8.1 FPM service"
 
 # Install phpMyAdmin
