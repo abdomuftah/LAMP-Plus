@@ -54,7 +54,7 @@ apt update && apt upgrade -y
 # Install additional tools
 echo -e "\e[1;32mInstalling additional tools...\e[0m"
 sleep 3
-apt install -y screen nano curl git zip unzip ufw certbot python3-certbot-apache2 || display_error "Failed to install additional tools"
+apt install -y screen nano curl git zip unzip ufw certbot python3-certbot-apache || display_error "Failed to install additional tools"
 apt install -y python3.11 libmysqlclient-dev python3-dev python3-pip
 ln -s /usr/bin/python3.11 /usr/bin/python
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py || display_error "Failed to install Python pip"
