@@ -179,13 +179,13 @@ systemctl restart apache2
 service php8.1-fpm reload
 
 # Install Let's Encrypt SSL
-#echo -e "\e[1;32m******************************************\e[0m"
-#echo -e "\e[1;32mInstalling Let's Encrypt SSL...\e[0m"
-#echo -e "\e[1;32m******************************************\e[0m"
-#sleep 3
-#certbot --noninteractive --agree-tos --no-eff-email --cert-name $domain --apache --redirect -d $domain -m $email || display_error "Failed to install Let's Encrypt SSL"
-#certbot renew --dry-run
-#systemctl restart apache2
+echo -e "\e[1;32m******************************************\e[0m"
+echo -e "\e[1;32mInstalling Let's Encrypt SSL...\e[0m"
+echo -e "\e[1;32m******************************************\e[0m"
+sleep 3
+certbot --noninteractive --agree-tos --no-eff-email --cert-name $domain --apache --redirect -d $domain -m $email || display_error "Failed to install Let's Encrypt SSL"
+certbot renew --dry-run
+systemctl restart apache2
 
 # Install glances
 echo -e "\e[1;32m******************************************\e[0m"
