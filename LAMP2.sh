@@ -29,10 +29,42 @@ get_user_input() {
     echo "$input"
 }
 
+# Validate domain name
+validate_domain() {
+    local domain="$1"
+    # Use regex pattern to validate domain name format
+    if [[ ! "$domain" =~ ^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$ ]]; then
+        display_error "Invalid domain name format. Please provide a valid domain name."
+    fi
+}
+
+# Validate email address
+validate_email() {
+    local email="$1"
+    # Use regex pattern to validate email address format
+    if [[ ! "$email" =~ ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$ ]]; then
+        display_error "Invalid email address format. Please provide a valid email address."
+    fi
+}
+
+# Validate MySQL root password
+validate_mysql_password() {
+    local password="$1"
+    # Check if password length is at least 8 characters
+    if [ ${#password} -lt 8 ]; then
+        display_error "MySQL root password must be at least 8 characters long."
+    fi
+}
+
 # Prompt user for domain, email, and MySQL root password
 domain=$(get_user_input "Set Web Domain (Example: example.com): ")
+validate_domain "$domain"
+
 email=$(get_user_input "Email for Let's Encrypt SSL: ")
+validate_email "$email"
+
 mysql_root_password=$(get_user_input "Enter MySQL root password: ")
+validate_mysql_password "$mysql_root_password"
 
 # Update system packages
 echo -e "\e[1;32m******************************************\e[0m"
@@ -142,12 +174,6 @@ echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect none" | debconf-se
 sleep 5
 apt install -y phpmyadmin || display_error "Failed to install phpMyAdmin"
 
-# Configure phpMyAdmin
-echo -e "\e[1;32m******************************************\e[0m"
-echo -e "\e[1;32mConfiguring phpMyAdmin...\e[0m"
-echo -e "\e[1;32m******************************************\e[0m"
-php /usr/share/doc/phpmyadmin/examples/create_tables.sql -u root -p$mysql_root_password
-
 # Update PHP configuration
 echo -e "\e[1;32m******************************************\e[0m"
 echo -e "\e[1;32mUpdating PHP configuration...\e[0m"
@@ -184,13 +210,14 @@ systemctl restart apache2
 service php8.1-fpm reload
 
 # Install Let's Encrypt SSL
-echo -e "\e[1;32m******************************************\e[0m"
-echo -e "\e[1;32mInstalling Let's Encrypt SSL...\e[0m"
-echo -e "\e[1;32m******************************************\e[0m"
-sleep 3
-certbot --noninteractive --agree-tos --no-eff-email --cert-name $domain --apache --redirect -d $domain -m $email || display_error "Failed to install Let's Encrypt SSL"
-certbot renew --dry-run
-systemctl restart apache2
+# echo -e "\e[1;32m******************************************\e[0m"
+# echo -e "\e[1;32mInstalling Let's Encrypt SSL...\e[0m"
+# echo -e "\e[1;32m******************************************\e[0m"
+# sleep 3
+# certbot --noninteractive --agree-tos --no-eff-email --cert-name $domain --apache --redirect -d $domain -m $email || display_error "Failed to install Let's Encrypt SSL"
+# certbot renew --dry-run
+# systemctl restart apache2
+
 
 # Install glances
 echo -e "\e[1;32m******************************************\e[0m"
