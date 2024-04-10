@@ -1,5 +1,30 @@
 #!/bin/bash
 
+# Function to display error message and exit
+display_error() {
+    echo -e "\e[1;31mError: $1\e[0m"
+    exit 1
+}
+
+# Reset MySQL root password if needed
+sudo mysql -u root <<MYSQL_SCRIPT
+ALTER USER 'root'@'localhost' IDENTIFIED BY '$mysql_root_password';
+FLUSH PRIVILEGES;
+MYSQL_SCRIPT
+
+# Restart MariaDB service
+sudo systemctl restart mariadb || display_error "Failed to restart MariaDB"
+echo -e "\e[1;32mMariaDB has been successfully installed and secured.\e[0m"
+
+# Function to prompt user for input and validate
+get_user_input() {
+    read -p "$1" input
+    if [[ -z "$input" ]]; then
+        display_error "Input cannot be empty"
+    fi
+    echo "$input"
+}
+
 # Clear the screen
 clear
 
@@ -13,21 +38,6 @@ echo -e "\e[1;34m* with phpMyAdmin, Node.js, and secure  *\e[0m"
 echo -e "\e[1;34m* your domain with Let's Encrypt SSL.   *\e[0m"
 echo -e "\e[1;34m******************************************\e[0m"
 echo ""
-
-# Function to display error message and exit
-display_error() {
-    echo -e "\e[1;31mError: $1\e[0m"
-    exit 1
-}
-
-# Function to prompt user for input and validate
-get_user_input() {
-    read -p "$1" input
-    if [[ -z "$input" ]]; then
-        display_error "Input cannot be empty"
-    fi
-    echo "$input"
-}
 
 # Prompt user for domain, email, and MySQL root password
 domain=$(get_user_input "Set Web Domain (Example: example.com): ")
@@ -109,19 +119,10 @@ Y
 Y
 EOF
 
-# Grant necessary privileges to the root user
-echo -e "\e[1;32m******************************************\e[0m"
-echo -e "\e[1;32mGranting necessary privileges to MySQL root user...\e[0m"
-echo -e "\e[1;32m******************************************\e[0m"
-sudo mysql -u root -p"$mysql_root_password" <<EOF
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '$mysql_root_password' WITH GRANT OPTION;
-FLUSH PRIVILEGES;
-EOF
-
 # Restart MariaDB service
 sudo systemctl restart mariadb || display_error "Failed to restart MariaDB"
 echo -e "\e[1;32mMariaDB has been successfully installed and secured.\e[0m"
-sleep 3
+
 # Continue with the rest of the installation process...
 
 # Install PHP 8.1 and required modules
@@ -141,12 +142,6 @@ echo "phpmyadmin phpmyadmin/mysql/app-pass password $mysql_root_password" | debc
 echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect none" | debconf-set-selections
 sleep 5
 apt install -y phpmyadmin || display_error "Failed to install phpMyAdmin"
-
-# Configure phpMyAdmin
-echo -e "\e[1;32m******************************************\e[0m"
-echo -e "\e[1;32mConfiguring phpMyAdmin...\e[0m"
-echo -e "\e[1;32m******************************************\e[0m"
-php /usr/share/doc/phpmyadmin/examples/create_tables.sql -u root -p$mysql_root_password
 
 # Update PHP configuration
 echo -e "\e[1;32m******************************************\e[0m"
@@ -184,13 +179,13 @@ systemctl restart apache2
 service php8.1-fpm reload
 
 # Install Let's Encrypt SSL
-echo -e "\e[1;32m******************************************\e[0m"
-echo -e "\e[1;32mInstalling Let's Encrypt SSL...\e[0m"
-echo -e "\e[1;32m******************************************\e[0m"
-sleep 3
-certbot --noninteractive --agree-tos --no-eff-email --cert-name $domain --apache --redirect -d $domain -m $email || display_error "Failed to install Let's Encrypt SSL"
-certbot renew --dry-run
-systemctl restart apache2
+#echo -e "\e[1;32m******************************************\e[0m"
+#echo -e "\e[1;32mInstalling Let's Encrypt SSL...\e[0m"
+#echo -e "\e[1;32m******************************************\e[0m"
+#sleep 3
+#certbot --noninteractive --agree-tos --no-eff-email --cert-name $domain --apache --redirect -d $domain -m $email || display_error "Failed to install Let's Encrypt SSL"
+#certbot renew --dry-run
+#systemctl restart apache2
 
 # Install glances
 echo -e "\e[1;32m******************************************\e[0m"
@@ -227,19 +222,19 @@ echo -e "\e[1;35mCurrent PHP version of this system:\e[0m" "PHP-$CURRENT"
 #
 echo -e "\e[1;35m##################################\e[0m"
 echo -e "\e[1;35mYou can thank me on:\e[0m"
-echo -e "https://twitter.com/ScarNaruto"
+echo -e "\e[1;35mhttps://twitter.com/ScarNaruto\e[0m"
 echo -e "\e[1;35mJoin my Discord Server:\e[0m"
-echo -e "https://discord.snyt.xyz"
+echo -e "\e[1;35mhttps://discord.snyt.xyz\e[0m"
 echo -e "\e[1;35m##################################\e[0m"
 echo -e "\e[1;35mYou can add a new domain to your server\e[0m"
-echo -e "\e[1;35mby typing:\e[0m" ./sdomain.sh "\e[1;35min the terminal\e[0m"
+echo -e "\e[1;35mby typing: ./sdomain.sh in the terminal\e[0m"
 echo -e "\e[1;35m----------------------------------\e[0m"
 echo -e "\e[1;35mphpMyAdmin Credentials:\e[0m"
 echo -e "\e[1;35mUsername: root\e[0m"
 echo -e "\e[1;35mPassword: $mysql_root_password\e[0m"
 echo -e "\e[1;35m----------------------------------\e[0m"
 echo -e "\e[1;35mCheck your web server by going to this link:\e[0m"
-echo -e "https://$domain"
+echo -e "\e[1;35mhttps://$domain\e[0m"
 #
 rm ~/LAMP.sh
 exit
