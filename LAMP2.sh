@@ -154,6 +154,7 @@ EOF
 sudo systemctl restart mariadb || display_error "Failed to restart MariaDB"
 echo -e "\e[1;32mMariaDB has been successfully installed and secured.\e[0m"
 sleep 3
+
 # Continue with the rest of the installation process...
 
 # Install PHP 8.1 and required modules
@@ -217,7 +218,6 @@ service php8.1-fpm reload
 # certbot --noninteractive --agree-tos --no-eff-email --cert-name $domain --apache --redirect -d $domain -m $email || display_error "Failed to install Let's Encrypt SSL"
 # certbot renew --dry-run
 # systemctl restart apache2
-
 
 # Install glances
 echo -e "\e[1;32m******************************************\e[0m"
