@@ -6,16 +6,6 @@ display_error() {
     exit 1
 }
 
-# Reset MySQL root password if needed
-sudo mysql -u root <<MYSQL_SCRIPT
-ALTER USER 'root'@'localhost' IDENTIFIED BY '$mysql_root_password';
-FLUSH PRIVILEGES;
-MYSQL_SCRIPT
-
-# Restart MariaDB service
-sudo systemctl restart mariadb || display_error "Failed to restart MariaDB"
-echo -e "\e[1;32mMariaDB has been successfully installed and secured.\e[0m"
-
 # Function to prompt user for input and validate
 get_user_input() {
     read -p "$1" input
@@ -153,6 +143,16 @@ cp -f php.ini /etc/php/8.1/apache2/ || display_error "Failed to copy PHP configu
 mv -f php.ini /etc/php/8.1/fpm/ || display_error "Failed to move PHP configuration file to FPM directory"
 systemctl restart apache2
 service php8.1-fpm reload
+
+# Reset MySQL root password if needed
+sudo mysql -u root <<MYSQL_SCRIPT
+ALTER USER 'root'@'localhost' IDENTIFIED BY '$mysql_root_password';
+FLUSH PRIVILEGES;
+MYSQL_SCRIPT
+
+# Restart MariaDB service
+sudo systemctl restart mariadb || display_error "Failed to restart MariaDB"
+echo -e "\e[1;32mMariaDB has been successfully installed and secured.\e[0m"
 
 # Create Apache2 virtual host
 echo -e "\e[1;32m******************************************\e[0m"
