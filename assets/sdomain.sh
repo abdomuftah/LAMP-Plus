@@ -49,7 +49,7 @@ a2ensite $domain || display_error "Failed to enable site configuration"
 systemctl restart apache2 || display_error "Failed to restart Apache"
 
 certbot --noninteractive --agree-tos --no-eff-email --cert-name $domain --apache --redirect -d $domain -m $email || display_error "Failed to install Let's Encrypt SSL"
-certbot renew --dry-run || display_error "Failed to run Let's Encrypt SSL renewal dry run"
+#certbot renew --dry-run || display_error "Failed to run Let's Encrypt SSL renewal dry run"
 systemctl restart apache2.service || display_error "Failed to restart Apache after Let's Encrypt SSL renewal"
 
 # Display success message
