@@ -5,20 +5,19 @@ display_error() {
     echo "Error: $1"
     exit 1
 }
-
+clear
 echo ""
-echo "******************************************"
-echo "*        Scar Naruto Add Domain          *"
-echo "******************************************"
-echo "*    Add New Domain To Server            *"
-echo "*     with Lets Encrypt                  *"
-echo "******************************************"
+echo -e "\e[1;34m******************************************\e[0m"
+echo -e "\e[1;34m*        Scar Naruto Add Domain           *\e[0m"
+echo -e "\e[1;34m******************************************\e[0m"
+echo -e "\e[1;34m*       Add New Domain To Server        *\e[0m"
+echo -e "\e[1;34m*           with Lets Encrypt           *\e[0m"
+echo -e "\e[1;34m******************************************\e[0m"
 echo ""
 
 # Prompt user for domain and email
 read -p 'Set Web Domain (Example: 127.0.0.1 [Not trailing slash!]): ' domain
 read -p 'Email for Lets Encrypt SSL: ' email
-read -p 'Enter PHPMyAdmin Username: ' phpmyadmin_user
 
 # Generate random password for phpMyAdmin
 phpmyadmin_password=$(openssl rand -base64 12)
@@ -31,11 +30,6 @@ fi
 # Validate email format
 if [[ ! $email =~ ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$ ]]; then
     display_error "Invalid email format"
-fi
-
-# Validate phpMyAdmin username format
-if [[ ! $phpmyadmin_user =~ ^[a-zA-Z0-9._-]+$ ]]; then
-    display_error "Invalid phpMyAdmin username format"
 fi
 
 mkdir /var/www/html/$domain || display_error "Failed to create directory for domain"
@@ -60,17 +54,17 @@ systemctl restart apache2.service || display_error "Failed to restart Apache aft
 
 # Display success message
 clear
-echo "##################################"
-echo "You Can Thank Me On :) "
-echo "https://twitter.com/Scar_Naruto"
-echo "Join My Discord Server "
-echo "https://discord.snyt.xyz"
-echo "##################################"
-echo " Your Domain is now ready  : "
-echo "https://$domain"
-echo "PHPMyAdmin URL: https://$domain/phpmyadmin"
-echo "PHPMyAdmin Username: $phpmyadmin_user"
-echo "PHPMyAdmin Password: $phpmyadmin_password"
-echo "##################################"
+echo -e "\e[1;35m##################################\e[0m"
+echo -e "\e[1;35mYou can thank me on:\e[0m"
+echo -e "\e[1;35mhttps://twitter.com/ScarNaruto\e[0m"
+echo -e "\e[1;35mJoin my Discord Server:\e[0m"
+echo -e "\e[1;35mhttps://discord.snyt.xyz\e[0m"
+echo -e "\e[1;35m##################################\e[0m"
+echo -e "\e[1;35m----------------------------------\e[0m"
+echo -e "\e[1;35mCheck your web server by going to this link:\e[0m"
+echo -e "\e[1;35mhttps://$domain\e[0m"
+echo -e "\e[1;35m----------------------------------\e[0m"
+
+
 
 exit
