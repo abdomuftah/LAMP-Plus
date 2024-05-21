@@ -67,14 +67,12 @@
         <div class="section">
             <h2>Server Details</h2>
             <div class="info">
+                <p><strong>Operating System:</strong> <?php echo php_uname('s'); ?></p>
                 <p><strong>Server Software:</strong> <?php echo $_SERVER['SERVER_SOFTWARE']; ?></p>
                 <p><strong>PHP Version:</strong> <?php echo phpversion(); ?></p>
                 <p><strong>Server IP:</strong> <?php echo $_SERVER['SERVER_ADDR']; ?></p>
-                <p><strong>Server Port:</strong> <?php echo $_SERVER['SERVER_PORT']; ?></p>
-                <p><strong>Server Protocol:</strong> <?php echo $_SERVER['SERVER_PROTOCOL']; ?></p>
                 <p><strong>Server Uptime:</strong> <?php echo shell_exec('uptime -p'); ?></p>
                 <p><strong>CPU Cores:</strong> <?php echo shell_exec('nproc'); ?></p>
-                <p><strong>Operating System:</strong> <?php echo php_uname('s'); ?></p>
                 <p><strong>Hostname:</strong> <?php echo php_uname('n'); ?></p>
             </div>
         </div>
@@ -89,10 +87,18 @@
         </div>
 
         <div class="section">
-            <h2>phpMyAdmin Credentials</h2>
+            <h2>RAM Usage</h2>
             <div class="info">
-                <p><strong>Username:</strong> root</p>
-                <p><strong>Password:</strong> <?php echo isset($mysql_root_password) ? $mysql_root_password : 'Set password in script'; ?></p>
+                <?php
+                $free = shell_exec('free -h');
+                $free = (string)trim($free);
+                $free_arr = explode("\n", $free);
+                $mem = array_filter(explode(" ", $free_arr[1]));
+                $mem = array_merge($mem);
+                ?>
+                <p><strong>Total RAM:</strong> <?php echo $mem[1]; ?></p>
+                <p><strong>Used RAM:</strong> <?php echo $mem[2]; ?></p>
+                <p><strong>Free RAM:</strong> <?php echo $mem[3]; ?></p>
             </div>
         </div>
         
