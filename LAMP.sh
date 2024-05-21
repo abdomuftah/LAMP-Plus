@@ -87,6 +87,7 @@ echo -e "\e[1;32mConfiguring firewall...\e[0m"
 echo -e "\e[1;32m******************************************\e[0m"
 ufw allow in 80
 ufw allow in 443
+ufw allow in 61208
 ufw allow OpenSSH
 
 # Install MySQL
