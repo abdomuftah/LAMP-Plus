@@ -42,7 +42,7 @@ mv /etc/apache2/sites-available/Example.conf /etc/apache2/sites-available/$domai
 sed -i "s/example.com/$domain/g" /etc/apache2/sites-available/$domain.conf || display_error "Failed to replace domain in virtual host configuration template"
 
 # Download index.php template
-wget -P /var/www/html/$domain https://raw.githubusercontent.com/abdomuftah/UbuntuServer/main/assets/index.php || display_error "Failed to download index.php template"
+wget -P /var/www/html/$domain https://raw.githubusercontent.com/abdomuftah/LAMP-Plus/main/assets/index.php || display_error "Failed to download index.php template"
 sed -i "s/example.com/$domain/g" /var/www/html/$domain/index.php || display_error "Failed to replace domain in index.php template"
 
 a2ensite $domain || display_error "Failed to enable site configuration"
