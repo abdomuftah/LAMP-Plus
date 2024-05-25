@@ -67,7 +67,4 @@ echo -e "\e[1;35m----------------------------------\e[0m"
 echo -e "\e[1;35mCheck your web server by going to this link:\e[0m"
 echo -e "\e[1;35mhttps://$domain\e[0m"
 echo -e "\e[1;35m----------------------------------\e[0m"
-
-
-
 exit
